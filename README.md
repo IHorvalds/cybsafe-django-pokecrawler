@@ -12,5 +12,6 @@ The 'startup' service runs the `manage.py startup` command (defined in `pokecraw
 I didn't want to use Celery for this and django-background-tasks was buggier than expected with Postgres.
 
 If I were to write tests for this, I would test the important functions in `tasks.py`: `findNewPokemon` and `refreshStalePokemon`.
-`findNewPokemon` should fail gracefully when there is a network error and the timeout is reached and also when the last Pokemon has id -1 (which shouldn't happen anyway).
-`refreshStalePokemon` should fail gracefully as well when the timeout is reached and for any other exception.
+
+* `findNewPokemon` should fail gracefully when there is a network error and the timeout is reached and also when the last Pokemon has id -1 (which shouldn't happen anyway).
+* `refreshStalePokemon` should fail gracefully as well when the timeout is reached and for any other exception.
