@@ -8,7 +8,7 @@ A directory should exist for postgres to save the data to.
 Also, images should build when launched with:
 `docker-compose up -d`
 
-The 'startup' service runs the `manage.py startup` command (defined in `pokecrawler/commands/startup.py`), which is an infinite loop with a timer as a rate limiter.
+The 'startup' service runs the `manage.py startup` command (defined in `pokecrawler/management/commands/startup.py`), which is an infinite loop with a timer as a rate limiter.
 I didn't want to use Celery for this and django-background-tasks was buggier than expected with Postgres.
 
 If I were to write tests for this, I would test the important functions in `tasks.py`: `findNewPokemon` and `refreshStalePokemon`.
