@@ -15,7 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+
+from rest_framework import routers
+from django.urls import path, include
+from django.conf import settings
+
+from pokecrawler.views import UserViewSet, PokemonViewSet, SpriteViewSet
+
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r'pokemon', PokemonViewSet)
+router.register(r'sprites', SpriteViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path("", include(router.urls)),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
