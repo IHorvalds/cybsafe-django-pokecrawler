@@ -7,12 +7,34 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./volumes/database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     depends_on:
+      - db
+  # process:
+  #   build: .
+  #   ## The sleep is just to make sure the migrations have finished.
+  #   command: bash -c "sleep 10 && python manage.py process_tasks --dev -v=3 --settings 'app.settings'"
+  #   volumes:
+  #     - .:/code
+  #   depends_on:
+  #     - web
+  #     - db
+  startup:
+    build: .
+    ## The sleep is just to make sure the migrations have finished.
+    command: bash -c "sleep 15 && python manage.py startup"
+    volumes:
+      - .:/code
+    depends_on:
+      - web
       - db
