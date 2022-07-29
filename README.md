@@ -15,3 +15,5 @@ If I were to write tests for this, I would test the important functions in `task
 
 * `findNewPokemon` should fail gracefully when there is a network error and the timeout is reached and also when the last Pokemon has id -1 (which shouldn't happen anyway).
 * `refreshStalePokemon` should fail gracefully as well when the timeout is reached and for any other exception.
+
+Note: I know the description for the Pokemon isn't very well generated.
