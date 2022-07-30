@@ -1,0 +1,9 @@
+django>=3,<4
+psycopg2
+djangorestframework
+markdown
+django-filter
+requests
+celery
+celery[redis]
+django-celery-beat
